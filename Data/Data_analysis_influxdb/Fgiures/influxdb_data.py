@@ -6,8 +6,10 @@ import matplotlib.dates as mdates
 from matplotlib.ticker import MaxNLocator
 import seaborn as sns
 
-ip = '192.168.188.74'
-host ='a0d7b954-influxdb'
+#Username,password,IP and hostname in the client's https request to the influxdb server has been removed for security reasons.
+
+ip = ''
+host ='' 
 
 
 start_year = 2024
@@ -29,7 +31,7 @@ time_series = pd.date_range(start=start_of_month, end=end_of_month, freq='T')
 
 
 
-client = InfluxDBClient(host=ip, port=8086, username='homeassistant', password='homeassistant', database='homeassistantdb')
+client = InfluxDBClient(host=ip, port=8086, username='', password='', database='')
 
 query_solar_prod = f'SELECT abs(last("value")) AS "solar_prod" FROM "homeassistantdb"."autogen"."W" WHERE time > \'{dashboardTime}\' AND time < \'{upperDashboardTime}\' AND "entity_id"=\'03_solarinput63a_active_power\' GROUP BY time(1m) FILL(previous)'
 query_varmepumpe = f'SELECT abs(last("value")) AS "varmepumpe" FROM "homeassistantdb"."autogen"."W" WHERE time > \'{dashboardTime}\' AND time < \'{upperDashboardTime}\' AND "entity_id"=\'11_varmepumpe32a_active_power\' GROUP BY time(1m) FILL(previous)'
